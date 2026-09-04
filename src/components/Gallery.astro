@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import twoDogs from "../assets/two-dogs-pink-bandanas.jpg";
+import cocker from "../assets/gallery-cocker-spaniel.jpg";
+import springer from "../assets/gallery-springer-spaniel.jpg";
+import necktie from "../assets/groomed-dog-necktie.png";
+import papillon from "../assets/papillon-blue-bandana.png";
+import bow from "../assets/groomed-dog-bow.jpg";
+import portrait from "../assets/happy-client-portrait.jpg";
+import groomedPup from "../assets/gallery-groomed-pup.jpg";
+
+interface Props {
+  limit?: number;
+}
+const { limit } = Astro.props;
+
+const items = [
+  { src: twoDogs, alt: "Two freshly groomed white dogs in matching pink paw-print bandanas" },
+  { src: springer, alt: "Springer spaniel styled with a bow tie after a full groom" },
+  { src: necktie, alt: "Small groomed dog dressed up in a necktie" },
+  { src: cocker, alt: "Cocker spaniel groomed and styled at Patty's Pup Cuts" },
+  { src: papillon, alt: "Fluffy papillon-mix in a blue gingham bandana on the grooming table" },
+  { src: portrait, alt: "Happy freshly groomed dog" },
+  { src: groomedPup, alt: "Groomed pup looking its best after a visit" },
+  { src: bow, alt: "Groomed dog wearing a bow" },
+];
+const list = limit ? items.slice(0, limit) : items;
+---
+
+<div class="columns-2 gap-4 sm:columns-3 [&>*]:mb-4">
+  {
+    list.map((item) => (
+      <div class="break-inside-avoid overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
+        <Image
+          src={item.src}
+          alt={item.alt}
+          widths={[240, 400, 600]}
+          sizes="(min-width: 640px) 30vw, 45vw"
+          class="w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    ))
+  }
+</div>

@@ -1,68 +1,77 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { SITE } from "../consts";
+
 interface Props {
   title: string;
   subtitle?: string;
   eyebrow?: string;
-  showBadges?: boolean;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  actions?: boolean;
 }
-const { title, subtitle, eyebrow, showBadges = false } = Astro.props;
+const { title, subtitle, eyebrow, image, imageAlt = "", actions = true } = Astro.props;
+const hasImage = Boolean(image);
 ---
 
-<section class="relative overflow-hidden bg-ink">
-  <!-- decorative accent glow -->
-  <div
-    class="pointer-events-none absolute -top-24 right-0 h-96 w-96 rounded-full bg-accent/20 blur-3xl"
-    aria-hidden="true"
-  >
-  </div>
-  <div
-    class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl"
-    aria-hidden="true"
-  >
-  </div>
+<section class="relative overflow-hidden bg-blush-soft">
+  <!-- decorative soft blobs -->
+  <div class="pointer-events-none absolute -top-24 -right-16 h-80 w-80 rounded-full bg-blush/50 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-28 -left-20 h-80 w-80 rounded-full bg-pink/10 blur-3xl" aria-hidden="true"></div>
 
-  <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-    <div class="max-w-3xl">
-      {eyebrow && <p class="text-sm font-semibold uppercase tracking-wider text-accent">{eyebrow}</p>}
-      <h1 class="mt-3 text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+  <div
+    class:list={[
+      "relative mx-auto max-w-6xl px-4 sm:px-6",
+      hasImage ? "grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2" : "py-16 text-center sm:py-20",
+    ]}
+  >
+    <div class={hasImage ? "" : "mx-auto max-w-3xl"}>
+      {eyebrow && <p class="font-script text-2xl text-pink">{eyebrow}</p>}
+      <h1 class="mt-2 text-4xl font-extrabold leading-tight text-ink sm:text-5xl lg:text-6xl">
         {title}
       </h1>
-      {subtitle && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">{subtitle}</p>}
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a
-          href={SITE.phoneHref}
-          class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-accent-600"
-        >
-          Call {SITE.phoneDisplay}
-        </a>
-        <a
-          href="/services/"
-          class="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10"
-        >
-          View services
-        </a>
-      </div>
+      {subtitle && <p class="mt-5 max-w-xl text-lg leading-relaxed text-body">{subtitle}</p>}
 
       {
-        showBadges && (
-          <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8">
-            <div>
-              <dt class="text-2xl font-extrabold text-white">{SITE.yearsExperience}</dt>
-              <dd class="mt-1 text-xs text-slate-400">Years of experience</dd>
-            </div>
-            <div>
-              <dt class="text-2xl font-extrabold text-white">4×</dt>
-              <dd class="mt-1 text-xs text-slate-400">Best of Bucks winner</dd>
-            </div>
-            <div>
-              <dt class="text-2xl font-extrabold text-white">5.0★</dt>
-              <dd class="mt-1 text-xs text-slate-400">Customer rating</dd>
-            </div>
-          </dl>
+        actions && (
+          <div class:list={["mt-8 flex flex-wrap gap-3", hasImage ? "" : "justify-center"]}>
+            <a
+              href={SITE.social.facebook}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full bg-pink px-6 py-3 text-base font-bold text-white shadow-lg shadow-pink/25 transition-colors hover:bg-pink-600"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+              </svg>
+              Book on Facebook
+            </a>
+            <a
+              href={SITE.phoneHref}
+              class="inline-flex items-center gap-2 rounded-full border-2 border-pink px-6 py-3 text-base font-bold text-pink transition-colors hover:bg-pink hover:text-white"
+            >
+              Call {SITE.phoneDisplay}
+            </a>
+          </div>
         )
       }
     </div>
+
+    {
+      hasImage && image && (
+        <div class="relative">
+          <div class="absolute -inset-3 -rotate-2 rounded-[2rem] bg-white/60" aria-hidden="true"></div>
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[400, 640, 900]}
+            sizes="(min-width: 1024px) 45vw, 90vw"
+            class="relative w-full rounded-[2rem] object-cover shadow-xl ring-1 ring-line"
+            loading="eager"
+          />
+        </div>
+      )
+    }
   </div>
 </section>

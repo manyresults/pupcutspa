@@ -1,90 +1,50 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ServicesGrid from "../components/ServicesGrid.astro";
+import Pricing from "../components/Pricing.astro";
+import Gallery from "../components/Gallery.astro";
 import Testimonials from "../components/Testimonials.astro";
 import CTA from "../components/CTA.astro";
 import { SITE } from "../consts";
+import heroImg from "../assets/two-dogs-pink-bandanas.jpg";
+import groomImg from "../assets/dog-grooming-haircut-morrisville.jpg";
 
-const reasons = [
-  {
-    title: "20+ years of experience",
-    text: "Two decades of hands-on detailing know-how on every make and model that rolls through our doors.",
-  },
-  {
-    title: "Award-winning work",
-    text: "A four-time Best of Bucks winner — recognized by the community we've proudly served for years.",
-  },
-  {
-    title: "Premium products",
-    text: "Professional-grade ceramic coatings, films, and finishes that protect your vehicle and last.",
-  },
-  {
-    title: "Honest, fair pricing",
-    text: "Straightforward estimates and quality work — the reason our customers keep coming back.",
-  },
+const trust = [
+  { title: "100% natural shampoos", body: "Gentle, non-toxic products chosen for sensitive skin and coats." },
+  { title: "One dog at a time", body: "Calm, one-on-one care — never a rushed, high-volume assembly line." },
+  { title: "Mother & daughter run", body: "A proudly women-owned, home-based salon that treats pets like family." },
+  { title: "By appointment only", body: "Drop off with curbside escort and pick up a happy, freshly groomed pup." },
 ];
 ---
 
 <BaseLayout
-  title={`${SITE.name} — Auto Detailing in ${SITE.address.city}, ${SITE.address.state}`}
+  title="Dog Grooming in Morrisville, PA"
   description={SITE.description}
 >
   <Hero
-    eyebrow={`${SITE.address.city}, ${SITE.address.state} · ${SITE.awards}`}
-    title="Detailing done the proper way."
-    subtitle={`Expert auto detailing, ceramic coating, and paint protection in ${SITE.address.city} and throughout Bucks County. Trusted for over 20 years to make every vehicle look its absolute best.`}
-    showBadges={true}
+    eyebrow="Welcome to"
+    title="Dog grooming with a personal touch in Morrisville"
+    subtitle="Patty's Pup Cuts is a home-based, mother-and-daughter salon just across from the Morrisville Dog Park. We groom one pup at a time using 100% natural shampoos — calm, careful, and never rushed."
+    image={heroImg}
+    imageAlt="Two freshly groomed white dogs in matching pink paw-print bandanas"
   />
 
-  <!-- Intro -->
-  <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
-      <p class="text-sm font-semibold uppercase tracking-wider text-accent">Welcome to Earl's</p>
-      <h2 class="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">
-        Bucks County's trusted auto detailing shop
-      </h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-600">
-        At {SITE.name}, we offer a complete range of services to make sure your
-        vehicle looks its absolute best — washing, waxing, polishing, interior
-        detailing, and long-lasting protection. With {SITE.yearsExperience} years
-        in the business and four consecutive Best of Bucks awards, you can trust
-        your car is in proper hands.
-      </p>
-    </div>
-  </section>
-
-  <!-- Featured services -->
-  <section class="bg-slate-50 py-16 sm:py-20">
+  <!-- Trust row -->
+  <section class="border-b border-line bg-white py-12 sm:py-16">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-wider text-accent">What we do</p>
-          <h2 class="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">Our services</h2>
-        </div>
-        <a href="/services/" class="font-semibold text-accent hover:text-accent-600">
-          View all services &rarr;
-        </a>
-      </div>
-      <div class="mt-10">
-        <ServicesGrid featuredOnly={true} />
-      </div>
-    </div>
-  </section>
-
-  <!-- Why choose us -->
-  <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-semibold uppercase tracking-wider text-accent">Why Earl's</p>
-        <h2 class="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">Why customers choose us</h2>
-      </div>
-      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {
-          reasons.map((r) => (
-            <div class="rounded-2xl border border-slate-200 p-6">
-              <h3 class="text-lg font-bold text-ink">{r.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-slate-600">{r.text}</p>
+          trust.map((t) => (
+            <div class="rounded-3xl bg-blush-soft p-6">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-pink text-white">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="mt-4 text-base font-bold text-ink">{t.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-body">{t.body}</p>
             </div>
           ))
         }
@@ -92,7 +52,106 @@ const reasons = [
     </div>
   </section>
 
-  <Testimonials />
+  <!-- Welcome / intro -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+      <div class="relative order-2 lg:order-1">
+        <div class="absolute -inset-3 rotate-2 rounded-[2rem] bg-blush/40" aria-hidden="true"></div>
+        <Image
+          src={groomImg}
+          alt="A groomer carefully trimming a cocker spaniel at Patty's Pup Cuts"
+          widths={[400, 640, 900]}
+          sizes="(min-width: 1024px) 45vw, 90vw"
+          class="relative w-full rounded-[2rem] object-cover shadow-xl ring-1 ring-line"
+          loading="lazy"
+        />
+      </div>
+      <div class="order-1 lg:order-2">
+        <p class="font-script text-2xl text-pink">Pamper your pal</p>
+        <h2 class="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">
+          Attentive, caring grooming — the way it should be
+        </h2>
+        <p class="mt-4 leading-relaxed text-body">
+          We know how much your dog means to you, because ours mean the world to us. At Patty's Pup Cuts,
+          your fur baby gets VIP one-on-one treatment from start to finish. You simply make an appointment,
+          drop them off, and pick up a pup who's primped, preened, and totally relaxed.
+        </p>
+        <p class="mt-4 leading-relaxed text-body">
+          With many years of experience, we take our cues from your dog throughout the visit and adapt so
+          they stay comfortable — because your pet's safety and comfort always come first.
+        </p>
+        <a href="/about/" class="mt-6 inline-flex items-center gap-1 font-bold text-pink hover:text-pink-600">
+          Meet Patty &amp; Crystal
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4L11.58 10 7.3 5.7a1 1 0 0 1 0-1.4Z" clip-rule="evenodd" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="bg-cloud py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">What we do</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">Grooming services for every pup</h2>
+        <p class="mt-3 text-body">From a full spa-day groom to a quick nail trim, we tailor every visit to your dog.</p>
+      </div>
+      <div class="mt-12">
+        <ServicesGrid featuredOnly />
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/services/" class="inline-flex rounded-full bg-pink px-6 py-3 text-base font-bold text-white shadow-lg shadow-pink/25 transition-colors hover:bg-pink-600">
+          See all services &amp; pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">Simple pricing</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">Full grooming, priced by size</h2>
+        <p class="mt-3 text-body">Every full groom includes a natural-shampoo bath, blow dry, haircut, nail trim, and brush out.</p>
+      </div>
+      <div class="mt-12">
+        <Pricing />
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-blush-soft py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">Happy clients</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">A few of our favorite pups</h2>
+      </div>
+      <div class="mt-12">
+        <Gallery limit={6} />
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/reviews/" class="inline-flex items-center gap-1 font-bold text-pink hover:text-pink-600">
+          See more happy pups &amp; reviews
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4L11.58 10 7.3 5.7a1 1 0 0 1 0-1.4Z" clip-rule="evenodd" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">Kind words</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">What Morrisville pet parents say</h2>
+      </div>
+      <div class="mt-12">
+        <Testimonials limit={3} />
+      </div>
+    </div>
+  </section>
 
   <CTA />
 </BaseLayout>

@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-  <rect x="1" y="1" width="38" height="38" rx="9" fill="#0a0f1a" />
-  <path d="M9 24.5c0-.7.3-1.2.9-1.6l1.7-3.4c.4-.9 1.3-1.5 2.3-1.5h10.2c1 0 1.9.6 2.3 1.5l1.7 3.4c.6.4.9.9.9 1.6v3.1c0 .5-.4.9-.9.9h-1.3c-.5 0-.9-.4-.9-.9v-.8H13.1v.8c0 .5-.4.9-.9.9H10c-.5 0-.9-.4-.9-.9v-3.1Z" fill="#fff" />
-  <circle cx="14" cy="26" r="1.6" fill="#0a0f1a" />
-  <circle cx="26" cy="26" r="1.6" fill="#0a0f1a" />
-  <path d="M30 9.5l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9.9-2.3Z" fill="#f5b301" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Patty's Pup Cuts">
+  <rect width="64" height="64" rx="16" fill="#fe318e"/>
+  <g fill="#ffffff">
+    <ellipse cx="20" cy="27" rx="5" ry="6.5"/>
+    <ellipse cx="31" cy="21" rx="5" ry="6.5"/>
+    <ellipse cx="44" cy="27" rx="5" ry="6.5"/>
+    <path d="M32 31c6.3 0 11.5 4.2 11.5 9.8 0 4.4-3.9 6.7-8 6.7-2.3 0-3 1-3.5 1.6-.5-.6-1.2-1.6-3.5-1.6-4.1 0-8-2.3-8-6.7C20.5 35.2 25.7 31 32 31Z"/>
+  </g>
 </svg>

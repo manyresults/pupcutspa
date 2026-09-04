@@ -2,81 +2,82 @@
  * ─────────────────────────────────────────────────────────────────────────
  *  SITE CONTENT & BUSINESS DATA — single source of truth
  * ─────────────────────────────────────────────────────────────────────────
- *  Everything a non-developer is likely to change lives here: business name,
- *  contact details, services, testimonials, nav, and SEO defaults. Edit this
- *  one file and the whole site + JSON-LD schema + sitemap update.
+ *  Almost everything a non-developer would change lives here: business name,
+ *  contact details, services & pricing, testimonials, FAQ, gallery, nav, and
+ *  SEO defaults. Edit this one file and the pages, footer, and JSON-LD schema
+ *  all update automatically.
  *
- *  ⚠️  CONTENT STATUS: This is a first-draft reconstruction assembled from
- *  public listings (the business website was not directly reachable from the
- *  build environment). Items marked `VERIFY` should be confirmed against the
- *  live site / owner before go-live. A follow-up session with network access
- *  to earlsdetailing.com can replace this with the exact copy + real photos.
+ *  CONTENT SOURCE: Text, pricing, testimonials, and images were migrated from
+ *  the live WordPress site (pupcutspa.com) in September 2026. Prices and the
+ *  five testimonials are verbatim from the site. A few FAQ answers are marked
+ *  `ASSUMPTION:` in comments — these are reasonable defaults (vaccination
+ *  policy, payment methods, appointment length) that the owner should confirm
+ *  or correct before/after go-live.
  */
 
 export const SITE = {
-  name: "Earl's Proper Detailing",
-  shortName: "Earl's Detailing",
-  legalName: "Earl's Proper Detailing",
-  url: "https://earlsdetailing.com",
-  tagline: "Bucks County's trusted auto detailing shop for over 20 years.",
+  name: "Patty's Pup Cuts",
+  shortName: "Pup Cuts",
+  legalName: "Pup Cuts Dog Grooming",
+  url: "https://pupcutspa.com",
+  tagline: "A calm, one-on-one dog grooming experience in Morrisville, PA.",
   // One-line description used as the default meta description / OG description.
   description:
-    "Earl's Proper Detailing in Langhorne, PA offers expert auto detailing, ceramic coating, paint correction, and paint protection film. 20+ years of experience and four-time Best of Bucks winner.",
+    "Patty's Pup Cuts is a home-based, mother-and-daughter dog grooming salon in Morrisville, PA. Appointment-only, one-on-one care using 100% natural shampoos. Full grooming, baths, nail trims and more for Bucks County pups.",
 
-  // Contact
-  phoneDisplay: "(215) 791-3015", // confirmed by owner
-  phoneHref: "tel:+12157913015",
-  email: "earlsdetailing@comcast.net",
+  // Contact — two numbers, as listed on the current site's contact page.
+  phoneDisplay: "(267) 499-6674",
+  phoneHref: "tel:+12674996674",
+  phone2Display: "(484) 554-3082",
+  phone2Href: "tel:+14845543082",
+  // Public email from the business's Google listing.
+  email: "pattyapurvis@gmail.com",
 
   // Address
   address: {
-    street: "95 Bristol Oxford Valley Rd",
-    city: "Langhorne",
+    street: "217 E Philadelphia Ave",
+    city: "Morrisville",
     state: "PA",
-    zip: "19047",
+    zip: "19067",
     country: "US",
+    landmark: "Across from the Morrisville Dog Park",
   },
-  // Approximate coordinates for JSON-LD (VERIFY / refine for exact pin).
-  geo: { lat: 40.1712, lng: -74.8846 },
+  // Approximate coordinates for JSON-LD / directions.
+  // ⚠️ VERIFY — refine the exact pin if needed.
+  geo: { lat: 40.2076, lng: -74.7745 },
 
-  // Google Maps link (uses the address string — safe default).
+  // Google Maps link (address search — safe default).
   mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Earl%27s+Proper+Detailing+95+Bristol+Oxford+Valley+Rd+Langhorne+PA+19047",
+    "https://www.google.com/maps/search/?api=1&query=Patty%27s+Pup+Cuts+217+E+Philadelphia+Ave+Morrisville+PA+19067",
 
-  // Hours of operation.
-  // ⚠️ VERIFY — these are placeholder typical hours; confirm before go-live.
-  hoursConfirmed: false,
-  hours: [
-    { day: "Monday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Tuesday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Wednesday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Thursday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Friday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Saturday", open: "8:00 AM", close: "2:00 PM" },
-    { day: "Sunday", open: null, close: null }, // closed
-  ] as Array<{ day: string; open: string | null; close: string | null }>,
+  // Hours: the business is strictly appointment-only and publishes no set
+  // hours, so we present "By appointment only" and omit openingHours from the
+  // schema. Flip `appointmentOnly` to false and fill `hours` to show times.
+  appointmentOnly: true,
+  hours: [] as Array<{ day: string; open: string | null; close: string | null }>,
 
   // Areas served (used in copy + JSON-LD areaServed).
   serviceAreas: [
-    "Langhorne",
-    "Levittown",
-    "Fairless Hills",
-    "Newtown",
+    "Morrisville",
     "Yardley",
-    "Bucks County, PA",
+    "Fairless Hills",
+    "Levittown",
+    "Newtown",
+    "Lower Makefield",
+    "Falls Township",
+    "Lower Bucks County, PA",
   ],
 
   // Trust signals
-  yearsExperience: "20+",
-  awards: "Four-time Best of Bucks winner",
+  womenOwned: true,
+  naturalProducts: true,
 
-  // Social profiles (add/adjust URLs as confirmed).
+  // Social profiles.
   social: {
-    facebook: "https://www.facebook.com/earlsdetail/",
-    // instagram: "",
+    facebook: "https://www.facebook.com/PupCutsGrooming/",
   },
 
-  // Default social share image (lives in /public). Swap for a branded 1200x630.
+  // Default social share image (lives in /public).
   ogImage: "/og-image.png",
 } as const;
 
@@ -84,14 +85,50 @@ export const SITE = {
 export const NAV = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services/" },
-  { label: "Specials", href: "/specials/" },
   { label: "About", href: "/about/" },
+  { label: "Reviews", href: "/reviews/" },
+  { label: "FAQ", href: "/faq/" },
   { label: "Contact", href: "/contact/" },
 ] as const;
 
 /**
- * Services. `icon` maps to an inline SVG in `src/components/ServiceIcon.astro`.
- * `featured: true` surfaces the service on the home page grid.
+ * ── PRICING TIERS ────────────────────────────────────────────────────────
+ * Full-groom pricing by dog size. Verbatim from the current site.
+ * Every full groom includes the items in `includes`.
+ */
+export const GROOM_INCLUDES = [
+  "Nail trimming",
+  "Luxurious bath",
+  "Blow dry",
+  "Haircut",
+  "Brush out",
+] as const;
+
+export interface PriceTier {
+  size: string;
+  price: string;
+  note?: string;
+  popular?: boolean;
+}
+
+export const PRICING: PriceTier[] = [
+  { size: "Small Dog", price: "$50", note: "Per dog, per session" },
+  { size: "Medium Dog", price: "$60", note: "Per dog, per session", popular: true },
+  { size: "Large Dog", price: "$80", note: "Per dog, per session" },
+  { size: "X-Large Dog", price: "$100+", note: "And up — per dog, per session" },
+];
+
+/**
+ * ── SERVICES ─────────────────────────────────────────────────────────────
+ * Individual / à la carte services. `icon` maps to an inline SVG in
+ * `src/components/ServiceIcon.astro`. Individual services are priced
+ * separately and may be combined — the current site lists no à la carte
+ * numbers, so these intentionally say "Ask when you book" rather than
+ * inventing prices.
+ *
+ * ASSUMPTION: "De-shedding", "Ear cleaning", "Sanitary & paw trim", and
+ * "Breed-specific styling" are standard offerings for a full-service groomer
+ * and are reasonable to list; confirm they're all offered before go-live.
  */
 export interface Service {
   title: string;
@@ -99,126 +136,177 @@ export interface Service {
   icon: string;
   summary: string; // short — used on cards
   description: string; // longer — used on the Services page
-  price?: string; // optional price note
+  price?: string;
   featured?: boolean;
 }
 
 export const SERVICES: Service[] = [
   {
-    title: "Full Auto Detailing",
-    slug: "auto-detailing",
-    icon: "sparkle",
-    summary: "Interior & exterior detailing that makes your vehicle look like new.",
+    title: "Full Groom",
+    slug: "full-groom",
+    icon: "scissors",
+    summary: "The complete spa day — bath, blow dry, haircut, nails, and brush out.",
     description:
-      "A complete interior and exterior detail — hand wash, clay, wax, tire renovator and shine, vinyl dressings, streak-free window finishes, and a deep interior clean of carpets, upholstery, and every surface. We treat every vehicle as if it were our own.",
+      "Our signature service and the heart of what we do. Your pup gets a luxurious bath with 100% natural shampoo, a gentle blow dry, a full haircut styled the way you like, nail trimming, and a thorough brush out. Priced by size — see the pricing above.",
+    price: "From $50",
     featured: true,
   },
   {
-    title: "Ceramic Coating",
-    slug: "ceramic-coating",
-    icon: "shield",
-    summary: "A durable barrier against the elements that keeps its shine for years.",
+    title: "Bath & Tidy",
+    slug: "bath-and-tidy",
+    icon: "bath",
+    summary: "A warm natural-shampoo bath, blow dry, and light tidy-up between full grooms.",
     description:
-      "Professional-grade ceramic coating creates a long-lasting protective barrier against UV rays, road salt, bird droppings, and harsh weather. It locks in a deep, glossy finish and makes future washes far easier — protection measured in years, not months.",
-    price: "Packages from $800",
+      "Perfect for keeping your dog fresh between full grooms. Includes a natural-shampoo bath, blow dry, brush out, and a light tidy of the face, feet, and sanitary areas. A great option for dogs who don't need a full haircut.",
+    price: "Ask when you book",
     featured: true,
   },
   {
-    title: "Paint Correction & Polishing",
-    slug: "paint-correction",
-    icon: "polish",
-    summary: "Remove swirls, scratches, and oxidation to restore a mirror finish.",
+    title: "Nail Trim",
+    slug: "nail-trim",
+    icon: "paw",
+    summary: "A quick, calm nail trim — on its own or added to any service.",
     description:
-      "Multi-stage machine polishing that removes swirl marks, light scratches, water spots, and oxidation, bringing back the deep, reflective gloss your paint had when it left the lot.",
+      "Overgrown nails are uncomfortable for your dog. Stop in for a quick, low-stress nail trim on its own, or add it to any grooming service. We take our time so nervous pups stay relaxed.",
+    price: "Ask when you book",
     featured: true,
   },
   {
-    title: "Paint Protection Film",
-    slug: "paint-protection-film",
-    icon: "film",
-    summary: "Clear film that shields high-impact panels from chips and abrasion.",
+    title: "De-Shedding Treatment",
+    slug: "de-shedding",
+    icon: "brush",
+    summary: "Loosen and remove undercoat to cut down on shedding around the house.",
     description:
-      "Paint protection film (PPF) adds a virtually invisible, self-healing layer over your vehicle's most vulnerable panels — bumpers, hood, and fenders — guarding against rock chips, road debris, and scratches.",
-    featured: true,
+      "For double-coated and heavy-shedding breeds, a de-shedding treatment gently removes loose undercoat with a bath, blow-out, and specialized brushing — leaving your dog more comfortable and your home a lot less furry.",
+    price: "Ask when you book",
   },
   {
-    title: "Paintless Dent Repair",
-    slug: "paintless-dent-repair",
-    icon: "dent",
-    summary: "Fix dings and dents without repainting — fast and affordable.",
+    title: "Ear Cleaning & Sanitary Trim",
+    slug: "ear-and-sanitary",
+    icon: "ear",
+    summary: "Gentle ear cleaning and a tidy sanitary trim to keep your pup comfortable.",
     description:
-      "Paintless dent repair gently massages dents and door dings back to shape from behind the panel, preserving your factory paint. It's faster and more cost-effective than traditional bodywork.",
-    featured: true,
+      "Careful ear cleaning plus a sanitary and paw trim to keep your dog clean and comfortable between full grooms. Can be added to any appointment.",
+    price: "Ask when you book",
   },
   {
-    title: "Windshield Repair & Replacement",
-    slug: "windshield",
-    icon: "windshield",
-    summary: "Chip repair and full windshield replacement to keep you safe.",
+    title: "Breed-Specific Styling",
+    slug: "breed-styling",
+    icon: "heart",
+    summary: "A cut tailored to your breed's coat — or any style you have in mind.",
     description:
-      "From small chip and crack repairs to complete windshield replacement, we keep your glass clear and your vehicle safe on the road.",
-    featured: true,
-  },
-  {
-    title: "Truck Bed Liner",
-    slug: "truck-bed-liner",
-    icon: "truck",
-    summary: "Tough, protective spray-in liners for your truck bed.",
-    description:
-      "Durable spray-in bed liners protect your truck bed from scratches, rust, and corrosion, standing up to heavy loads and daily use.",
-  },
-  {
-    title: "Mobile Detailing",
-    slug: "mobile-detailing",
-    icon: "van",
-    summary: "Professional detailing that comes to you — home or office.",
-    description:
-      "Can't make it to the shop? Our mobile detailing service brings professional-grade care to your driveway or workplace. (Call to confirm availability in your area.)",
+      "Whether you want the classic look for your breed or something a little different, we'll style your dog's coat to suit them. Bring a photo of the look you love and we'll make it happen.",
+    price: "Included with Full Groom",
   },
 ];
 
 /**
- * Testimonials pulled from public reviews (Yelp/Google). Attribution is kept
- * generic where a full name wasn't available — add real names as confirmed.
+ * ── TESTIMONIALS ─────────────────────────────────────────────────────────
+ * The five reviews from the current site's Reviews page — verbatim, with
+ * the reviewer's name and original date.
  */
 export interface Testimonial {
   quote: string;
   author: string;
+  date?: string;
   source?: string;
 }
 
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Dario did a fantastic job — inside and out. The interior looks amazing and the exterior is so clean it looks like the day I rolled it off the lot. The engine looks sweet too. Easy going and kind. I'll definitely return and recommend to others.",
-    author: "Satisfied Customer",
-    source: "Yelp Review",
+      "Just when I thought my ridiculously good looking pupper T-Bone Jones could not be any more handsome, an hour with Patty at Pup Cuts upped his game to game-changing levels. He's dapper, soft, and smells delightful. Appointment times are convenient, and Patty is super responsive, professional, and cares about the doggos!",
+    author: "Dan Jones",
+    date: "June 29, 2020",
   },
   {
     quote:
-      "A great auto detail and body shop for all of your vehicles. Had my Camry ceramic coated, scratches removed, and the body polished — the results speak for themselves.",
-    author: "Verified Customer",
-    source: "Yelp Review",
+      "I took my “Jadie” to Patty for the 1st time and she was so great with my dog. She did a wonderful job on her grooming & was so gentle with her. She is very professional & gives quality service at a great price. I will definitely be taking my “Jadie” back to her.",
+    author: "Janet Undercoffer",
+    date: "June 6, 2020",
   },
   {
     quote:
-      "Earl is honest and fair. He repaired scratches on my car at a very reasonable price and did excellent work. Highly recommend.",
-    author: "Local Customer",
-    source: "Google Review",
+      "My puppy loves going to Patty. She's responsive and does an amazing job. Very affordable. I'll never bring him to anyone else!",
+    author: "Sarah Del Grosso",
+    date: "March 7, 2021",
+  },
+  {
+    quote: "Patty you are awesome.. Thanks for all you have done for Layla.",
+    author: "Shelly Williams",
+    date: "April 1, 2021",
+  },
+  {
+    quote: "Great to work with. Great price. Nice job.",
+    author: "Elieen Rispo",
+    date: "April 7, 2021",
   },
 ];
 
-/** Current specials / promotions (edit freely). */
-export const SPECIALS = [
+/**
+ * ── FAQ ──────────────────────────────────────────────────────────────────
+ * Used on the FAQ page (with FAQPage JSON-LD) and referenced elsewhere.
+ * ASSUMPTION notes flag answers that were reasonably inferred and should be
+ * confirmed by the owner.
+ */
+export interface Faq {
+  q: string;
+  a: string;
+}
+
+export const FAQS: Faq[] = [
   {
-    title: "10% Off Your Service",
-    detail: "Mention our website when you book and take 10% off your detailing service.",
-    highlight: "Mention this site",
+    q: "How do I book an appointment?",
+    a: "The easiest way is to message us on Facebook or give us a call or text at (267) 499-6674. We're a small, appointment-only salon, so reaching out directly is the fastest way to find a time that works. No Facebook? No problem — call, text, or use the contact form on this site.",
   },
   {
-    title: "Ceramic Coating Packages",
-    detail:
-      "Long-lasting ceramic protection with packages starting at $800. Ask about the right package for your vehicle.",
-    highlight: "From $800",
+    q: "Are you appointment-only?",
+    a: "Yes. We're a home-based salon and groom one dog at a time, so every visit is by appointment. This keeps things calm and unhurried for your pup — we're not a high-volume chain groomer.",
+  },
+  {
+    q: "What happens at my dog's first visit?",
+    a: "You'll drop your fur baby off at your appointment time (we offer curbside escort), let us know the style and length you're after, and pick them back up when they're freshly groomed. We take cues from your dog throughout and adapt so they stay comfortable from start to finish.",
+  },
+  {
+    q: "What should I bring?",
+    a: "Just your dog and a photo of any specific style you have in mind. If your dog has allergies, sensitivities, or medical needs, please tell us when you book. We recommend bringing or having your vaccination records available. (ASSUMPTION — confirm your exact policy.)",
+  },
+  {
+    q: "Do you require vaccinations?",
+    a: "For the safety of every pet in our care, we ask that dogs be up to date on their core vaccinations, including rabies. If you're unsure, give us a call before your appointment and we'll be glad to talk it through. (ASSUMPTION — confirm your exact vaccination policy.)",
+  },
+  {
+    q: "What products do you use?",
+    a: "We use 100% natural shampoos and conditioners. Now more than ever, your pet's safety and comfort are our top priorities, and gentle, natural products are part of that.",
+  },
+  {
+    q: "What's your cancellation policy?",
+    a: "Because we groom one dog at a time by appointment, arrivals 10 minutes late or more without notice are considered a cancellation. If you need to reschedule, just let us know ahead of time and we'll find a new spot.",
+  },
+  {
+    q: "What sizes and breeds do you groom?",
+    a: "All sizes, from small pups to extra-large dogs — full-groom pricing is set by size. If you're not sure which tier your dog falls into or have a breed-specific style in mind, just ask when you book.",
+  },
+  {
+    q: "How long does grooming take?",
+    a: "It depends on your dog's size, coat, and temperament, but most full grooms take a couple of hours. Because we never rush a pet, we'll give you a realistic pickup time when you drop off. (ASSUMPTION — adjust to your typical timing.)",
+  },
+  {
+    q: "How do I pay?",
+    a: "Payment is due at pickup. Please reach out when you book if you'd like to confirm accepted payment methods. (ASSUMPTION — confirm the payment methods you accept.)",
   },
 ];
+
+/**
+ * ── GALLERY ──────────────────────────────────────────────────────────────
+ * Real client photos migrated from the site. Images are imported in the page
+ * that renders them (astro:assets) so filenames here are for reference only.
+ */
+export const GALLERY = [
+  { file: "two-dogs-pink-bandanas.jpg", alt: "Two freshly groomed white dogs in matching pink paw-print bandanas" },
+  { file: "gallery-cocker-spaniel.jpg", alt: "Cocker spaniel groomed and styled at Patty's Pup Cuts" },
+  { file: "gallery-springer-spaniel.jpg", alt: "Springer spaniel with a bow tie after a full groom" },
+  { file: "groomed-dog-necktie.png", alt: "Small dog dressed up in a necktie after grooming" },
+  { file: "papillon-blue-bandana.png", alt: "Fluffy papillon-mix in a blue gingham bandana" },
+  { file: "groomed-dog-bow.jpg", alt: "Happy groomed dog wearing a bow" },
+] as const;

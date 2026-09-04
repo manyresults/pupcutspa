@@ -1,0 +1,19 @@
+---
+/** PageHeader.astro — compact hero for interior pages. */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+}
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-blush-soft">
+  <div class="pointer-events-none absolute -top-20 -right-16 h-72 w-72 rounded-full bg-blush/40 blur-3xl" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-3xl px-4 py-14 text-center sm:px-6 sm:py-20">
+    {eyebrow && <p class="font-script text-2xl text-pink">{eyebrow}</p>}
+    <h1 class="mt-2 text-4xl font-extrabold leading-tight text-ink sm:text-5xl">{title}</h1>
+    {subtitle && <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-body">{subtitle}</p>}
+  </div>
+</section>
+<div class="paw-divider" aria-hidden="true"></div>

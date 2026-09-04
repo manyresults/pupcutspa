@@ -1,80 +1,141 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import Testimonials from "../components/Testimonials.astro";
+import PageHeader from "../components/PageHeader.astro";
 import CTA from "../components/CTA.astro";
 import { SITE } from "../consts";
+import storyImg from "../assets/groomed-dog-necktie.png";
+import womenOwned from "../assets/women-owned-business-badge.png";
+
+const values = [
+  {
+    title: "An individual approach",
+    body: "Every pet is different. We take cues from your dog throughout the visit and adapt the service to suit them, gently removing anything that could cause stress.",
+  },
+  {
+    title: "Comfort comes first",
+    body: "We groom one dog at a time and never rush. That calm, unhurried pace is the whole point of a home-based salon — and why nervous pups do so well with us.",
+  },
+  {
+    title: "Gentle, natural products",
+    body: "We use 100% natural shampoos and conditioners, chosen with sensitive skin and coats in mind.",
+  },
+  {
+    title: "Treated like family",
+    body: "Our pets are our best friends and our children. Yours are treated with the same love and care from drop-off to pickup.",
+  },
+];
 ---
 
 <BaseLayout
-  title="About Us"
-  description={`Learn about Earl's Proper Detailing — a four-time Best of Bucks winner with over 20 years of auto detailing experience in ${SITE.address.city}, ${SITE.address.state}.`}
+  title="About Patty's Pup Cuts — Our Story"
+  description="Meet Patty and Crystal, the mother-and-daughter duo behind Patty's Pup Cuts, a proudly women-owned, home-based dog grooming salon in Morrisville, PA. Calm, one-on-one care with years of experience."
 >
-  <Hero
-    eyebrow="About us"
-    title="Proper detailing, done right for over 20 years"
-    subtitle="Earl's Proper Detailing has been making Bucks County's vehicles shine for two decades — with honest work, premium products, and pride in every detail."
+  <PageHeader
+    eyebrow="Our story"
+    title="Meet Patty & Crystal"
+    subtitle="The mother-and-daughter duo behind Patty's Pup Cuts."
   />
 
+  <!-- Story -->
   <section class="py-16 sm:py-20">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <div class="prose-lg space-y-5 text-lg leading-relaxed text-slate-600">
-        <p>
-          At {SITE.name}, we provide a comprehensive range of services to ensure
-          your vehicle looks its absolute best. From washing, waxing, and
-          polishing to full interior detailing, ceramic coating, and paint
-          protection, our team brings over {SITE.yearsExperience} years of
-          experience to every job.
-        </p>
-        <p>
-          That experience — and our commitment to doing things the proper way —
-          has earned us the <strong class="text-ink">Best of Bucks</strong> award
-          four consecutive years. But the recognition we value most comes from
-          our customers, who trust us with their vehicles and keep coming back.
-        </p>
-        <p>
-          Whether you're protecting a brand-new car with a ceramic coating,
-          restoring the finish on a daily driver, or getting your vehicle ready
-          to sell, we treat every car as if it were our own.
-        </p>
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+      <div>
+        <h2 class="text-3xl font-extrabold text-ink sm:text-4xl">A home-based salon built on a love of dogs</h2>
+        <div class="mt-4 space-y-4 leading-relaxed text-body">
+          <p>
+            Patty's Pup Cuts started the way the best small businesses do — from genuine love for animals and
+            a belief that grooming should be a calm, caring experience, not a rushed one. Patty and her
+            daughter Crystal run the salon together, side by side, right here in Morrisville.
+          </p>
+          <p>
+            With many years of experience between them, they've built a reputation for patient, attentive
+            grooming. Because it's just the two of them and they see one dog at a time, they get to know every
+            pup that comes through the door — their quirks, their favorite spots to be scratched, and exactly
+            how they like to look when they head home.
+          </p>
+          <p>
+            That's the difference between a home-based groomer and a high-volume chain: here, your dog isn't
+            one of dozens on a conveyor belt. They're a guest, and they're treated like one.
+          </p>
+        </div>
+
+        <!-- Women-owned badge -->
+        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-line bg-blush-soft p-5">
+          <Image src={womenOwned} alt="Certified Women-Owned business" width={110} class="h-auto w-24 flex-none" loading="lazy" />
+          <p class="text-sm leading-relaxed text-body">
+            <span class="font-bold text-ink">Proudly women-owned.</span> A mother-and-daughter team you'll
+            actually get to know — because they're the ones caring for your dog.
+          </p>
+        </div>
       </div>
 
-      <!-- Stats -->
-      <dl class="mt-12 grid grid-cols-3 gap-6 rounded-2xl bg-slate-50 p-8 text-center">
-        <div>
-          <dt class="text-3xl font-extrabold text-accent">{SITE.yearsExperience}</dt>
-          <dd class="mt-1 text-sm text-slate-600">Years in business</dd>
-        </div>
-        <div>
-          <dt class="text-3xl font-extrabold text-accent">4×</dt>
-          <dd class="mt-1 text-sm text-slate-600">Best of Bucks</dd>
-        </div>
-        <div>
-          <dt class="text-3xl font-extrabold text-accent">5.0★</dt>
-          <dd class="mt-1 text-sm text-slate-600">Customer rating</dd>
-        </div>
-      </dl>
+      <div class="relative">
+        <div class="absolute -inset-3 -rotate-2 rounded-[2rem] bg-blush/40" aria-hidden="true"></div>
+        <Image
+          src={storyImg}
+          alt="A freshly groomed little dog dressed up after its visit to Patty's Pup Cuts"
+          widths={[360, 560, 700]}
+          sizes="(min-width: 1024px) 45vw, 90vw"
+          class="relative w-full rounded-[2rem] object-cover shadow-xl ring-1 ring-line"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
 
-      <!-- Service area -->
-      <div class="mt-12">
-        <h2 class="text-2xl font-extrabold text-ink">Areas we serve</h2>
-        <p class="mt-3 text-slate-600">
-          Proudly serving {SITE.address.city} and the surrounding communities:
+  <!-- Values -->
+  <section class="bg-cloud py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">How we work</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">Our grooming philosophy</h2>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {
+          values.map((v) => (
+            <div class="rounded-3xl border border-line bg-white p-6 shadow-sm">
+              <h3 class="text-lg font-bold text-ink">{v.title}</h3>
+              <p class="mt-2 leading-relaxed text-body">{v.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Local / Morrisville -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      <div class="text-center">
+        <p class="font-script text-2xl text-pink">Right here in town</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">Grooming in Morrisville & Lower Bucks County</h2>
+      </div>
+      <div class="mt-6 space-y-4 leading-relaxed text-body">
+        <p>
+          We're home-based in the quaint, historic Borough of Morrisville — a town of about two square miles
+          at the falls of the Delaware River, right across from Trenton. You'll find us at
+          <span class="font-semibold text-ink"> {SITE.address.street}, {SITE.address.city}, {SITE.address.state} {SITE.address.zip}</span>,
+          {" "}{SITE.address.landmark.toLowerCase()}.
         </p>
-        <ul class="mt-4 flex flex-wrap gap-2">
+        <p>
+          We're easy to reach from across the region by US-1, US-13, and I-95, so we're a convenient stop for
+          pet parents throughout Lower Bucks County and nearby New Jersey. Take a walk along the scenic
+          Delaware River while your pup is pampered!
+        </p>
+      </div>
+      <div class="mt-8">
+        <h3 class="text-center text-sm font-bold uppercase tracking-wider text-ink">Proudly serving</h3>
+        <ul class="mx-auto mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
           {
             SITE.serviceAreas.map((area) => (
-              <li class="rounded-full bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
-                {area}
-              </li>
+              <li class="rounded-full bg-blush-soft px-4 py-1.5 text-sm font-semibold text-pink-700">{area}</li>
             ))
           }
         </ul>
       </div>
     </div>
   </section>
-
-  <Testimonials heading="Trusted by our neighbors" />
 
   <CTA />
 </BaseLayout>

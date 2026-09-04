@@ -1,34 +1,38 @@
 ---
 import { SITE } from "../consts";
 interface Props {
-  heading?: string;
-  text?: string;
+  title?: string;
+  subtitle?: string;
 }
 const {
-  heading = "Ready to make your vehicle shine?",
-  text = "Get a free estimate or book your detail today. We'd love to earn your business.",
+  title = "Ready to treat your pup?",
+  subtitle = "Message us on Facebook or call to book your dog's one-on-one appointment. No Facebook? No problem — give us a call or text.",
 } = Astro.props;
 ---
 
-<section class="bg-accent">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 py-12 sm:px-6 md:flex-row md:py-14">
-    <div class="text-center md:text-left">
-      <h2 class="text-2xl font-extrabold text-white sm:text-3xl">{heading}</h2>
-      <p class="mt-2 max-w-xl text-white/90">{text}</p>
-    </div>
-    <div class="flex flex-shrink-0 flex-wrap justify-center gap-3">
+<section class="bg-pink">
+  <div class="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 sm:py-16">
+    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{title}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/90">{subtitle}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href={SITE.social.facebook}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-bold text-pink shadow-lg transition-transform hover:-translate-y-0.5"
+      >
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+        </svg>
+        Book on Facebook
+      </a>
       <a
         href={SITE.phoneHref}
-        class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-semibold text-accent shadow-sm transition-colors hover:bg-slate-100"
+        class="inline-flex items-center gap-2 rounded-full border-2 border-white/80 px-6 py-3 text-base font-bold text-white transition-colors hover:bg-white/10"
       >
         Call {SITE.phoneDisplay}
       </a>
-      <a
-        href="/contact/"
-        class="inline-flex items-center gap-2 rounded-full border border-white/70 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10"
-      >
-        Contact us
-      </a>
     </div>
+    <p class="mt-5 text-sm text-white/80">Or call / text {SITE.phone2Display} · {SITE.address.landmark}</p>
   </div>
 </section>

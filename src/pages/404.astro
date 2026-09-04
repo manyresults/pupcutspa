@@ -1,20 +1,26 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE } from "../consts";
+import { SITE, NAV } from "../consts";
 ---
 
-<BaseLayout title="Page not found" noindex={true}>
-  <section class="mx-auto flex max-w-2xl flex-col items-center px-4 py-24 text-center sm:px-6 sm:py-32">
-    <p class="text-6xl font-extrabold text-accent">404</p>
-    <h1 class="mt-4 text-3xl font-extrabold text-ink sm:text-4xl">This page took a wrong turn</h1>
-    <p class="mt-4 text-lg text-slate-600">
-      Sorry, we couldn't find the page you were looking for. Let's get you back on the road.
-    </p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="/" class="rounded-full bg-accent px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-600">
-        Back to home
-      </a>
-      <a href={SITE.phoneHref} class="rounded-full border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+<BaseLayout title="Page Not Found" noindex>
+  <section class="bg-blush-soft">
+    <div class="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
+      <p class="font-script text-3xl text-pink">Woof!</p>
+      <h1 class="mt-2 text-5xl font-extrabold text-ink">404</h1>
+      <p class="mt-4 text-lg text-body">
+        This page ran off chasing a squirrel. Let's get you back on track.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        {
+          NAV.map((item) => (
+            <a href={item.href} class="rounded-full border border-line bg-white px-4 py-2 text-sm font-bold text-ink transition-colors hover:border-pink hover:text-pink">
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+      <a href={SITE.phoneHref} class="mt-8 inline-flex rounded-full bg-pink px-6 py-3 text-base font-bold text-white shadow-lg shadow-pink/25 transition-colors hover:bg-pink-600">
         Call {SITE.phoneDisplay}
       </a>
     </div>

@@ -7,10 +7,21 @@ const norm = (p: string) => (p !== "/" ? p.replace(/\/$/, "") : p);
 const current = norm(Astro.url.pathname);
 ---
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+<!-- Announcement strip -->
+<div class="bg-pink text-white">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-3 gap-y-1 px-4 py-1.5 text-center text-xs font-semibold sm:text-sm">
+    <span>🐾 By appointment only · {SITE.address.landmark}</span>
+    <span class="hidden sm:inline" aria-hidden="true">·</span>
+    <a href={SITE.phoneHref} class="underline decoration-white/40 underline-offset-2 hover:decoration-white">
+      Call or text {SITE.phoneDisplay}
+    </a>
+  </div>
+</div>
+
+<header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-    <a href="/" class="flex items-center gap-2" aria-label={`${SITE.name} — home`}>
-      <Logo class="h-9 w-auto" />
+    <a href="/" class="flex items-center" aria-label={`${SITE.name} — home`}>
+      <Logo class="h-11 w-auto sm:h-14" />
     </a>
 
     <!-- Desktop nav -->
@@ -23,10 +34,8 @@ const current = norm(Astro.url.pathname);
               href={item.href}
               aria-current={active ? "page" : undefined}
               class:list={[
-                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                active
-                  ? "text-accent"
-                  : "text-slate-700 hover:text-accent",
+                "rounded-full px-3 py-2 text-sm font-bold transition-colors",
+                active ? "text-pink" : "text-ink hover:text-pink",
               ]}
             >
               {item.label}
@@ -38,17 +47,22 @@ const current = norm(Astro.url.pathname);
 
     <div class="flex items-center gap-2">
       <a
-        href={SITE.phoneHref}
-        class="hidden rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-600 sm:inline-flex"
+        href={SITE.social.facebook}
+        target="_blank"
+        rel="noopener"
+        class="hidden items-center gap-2 rounded-full bg-pink px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-pink-600 sm:inline-flex"
       >
-        Call {SITE.phoneDisplay}
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+        </svg>
+        Book on Facebook
       </a>
 
       <!-- Mobile menu toggle -->
       <button
         id="menu-toggle"
         type="button"
-        class="inline-flex items-center justify-center rounded-md p-2 text-slate-700 md:hidden"
+        class="inline-flex items-center justify-center rounded-md p-2 text-ink md:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label="Toggle navigation menu"
@@ -61,11 +75,7 @@ const current = norm(Astro.url.pathname);
   </div>
 
   <!-- Mobile menu -->
-  <nav
-    id="mobile-menu"
-    class="hidden border-t border-slate-200 bg-white md:hidden"
-    aria-label="Mobile"
-  >
+  <nav id="mobile-menu" class="hidden border-t border-line bg-white md:hidden" aria-label="Mobile">
     <ul class="space-y-1 px-4 py-3">
       {
         NAV.map((item) => {
@@ -76,8 +86,8 @@ const current = norm(Astro.url.pathname);
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 class:list={[
-                  "block rounded-md px-3 py-2 text-base font-medium",
-                  active ? "bg-slate-50 text-accent" : "text-slate-700 hover:bg-slate-50",
+                  "block rounded-lg px-3 py-2 text-base font-bold",
+                  active ? "bg-blush-soft text-pink" : "text-ink hover:bg-blush-soft",
                 ]}
               >
                 {item.label}
@@ -86,12 +96,20 @@ const current = norm(Astro.url.pathname);
           );
         })
       }
-      <li class="pt-2">
+      <li class="grid grid-cols-2 gap-2 pt-2">
+        <a
+          href={SITE.social.facebook}
+          target="_blank"
+          rel="noopener"
+          class="block rounded-full bg-pink px-4 py-2 text-center text-base font-bold text-white"
+        >
+          Facebook
+        </a>
         <a
           href={SITE.phoneHref}
-          class="block rounded-full bg-accent px-4 py-2 text-center text-base font-semibold text-white"
+          class="block rounded-full border-2 border-pink px-4 py-2 text-center text-base font-bold text-pink"
         >
-          Call {SITE.phoneDisplay}
+          Call
         </a>
       </li>
     </ul>

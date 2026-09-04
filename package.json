@@ -1,9 +1,9 @@
 {
-  "name": "earlsdetailing",
+  "name": "pattys-pup-cuts",
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Static marketing site for Earl's Proper Detailing (Langhorne, PA), built with Astro + Tailwind CSS.",
+  "description": "Static marketing site for Patty's Pup Cuts, a home-based dog grooming salon in Morrisville, PA, built with Astro + Tailwind CSS.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

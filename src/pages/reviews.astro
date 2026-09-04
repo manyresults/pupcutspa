@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Gallery from "../components/Gallery.astro";
+import CTA from "../components/CTA.astro";
+import { SITE } from "../consts";
+---
+
+<BaseLayout
+  title="Reviews & Happy Clients"
+  description="See what Morrisville-area pet parents say about Patty's Pup Cuts, and browse photos of some of our freshly groomed happy clients."
+>
+  <PageHeader
+    eyebrow="Reviews & happy clients"
+    title="Don't just take our word for it"
+    subtitle="We provide excellent care to both our customers and their pets. Here's what a few of them have to say."
+  />
+
+  <!-- Testimonials -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <Testimonials />
+      <p class="mt-8 text-center text-sm text-body">
+        Had a great experience? We'd love a review on{" "}
+        <a href={SITE.social.facebook} target="_blank" rel="noopener" class="font-bold text-pink hover:text-pink-600">our Facebook page</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-blush-soft py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="font-script text-2xl text-pink">Our happy pups</p>
+        <h2 class="mt-1 text-3xl font-extrabold text-ink sm:text-4xl">Freshly groomed & ready to go home</h2>
+      </div>
+      <div class="mt-12">
+        <Gallery />
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

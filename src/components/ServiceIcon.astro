@@ -1,7 +1,8 @@
 ---
 /**
- * ServiceIcon.astro — maps a `name` key (from SERVICES[].icon) to an inline
- * SVG. Inline SVGs keep the site fast (no image requests) and crisp at any size.
+ * ServiceIcon.astro — inline, dependency-free SVG icons for services.
+ * `name` maps to the `icon` field in SERVICES (src/consts.ts).
+ * Icons inherit `currentColor` so they take the surrounding text color.
  */
 interface Props {
   name: string;
@@ -10,36 +11,62 @@ interface Props {
 const { name, class: className = "h-7 w-7" } = Astro.props;
 ---
 
-<svg
-  class={className}
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.6"
-  stroke="currentColor"
-  aria-hidden="true"
->
-  {name === "sparkle" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M9.8 4.2 11 8l3.8 1.2L11 10.4 9.8 14 8.6 10.4 4.8 9.2 8.6 8 9.8 4.2Zm7.7 8 .8 2.5 2.5.8-2.5.8-.8 2.5-.8-2.5-2.5-.8 2.5-.8.8-2.5Z" />
-  )}
-  {name === "shield" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 2.5v5c0 4.6-3 8.4-7 9.5-4-1.1-7-4.9-7-9.5v-5L12 3Zm-2.5 8.5 2 2 3.5-4" />
-  )}
-  {name === "polish" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M4 20 14 10m0 0 2.5-2.5a2.1 2.1 0 0 1 3 3L17 13m-3-3 3 3m1-9 .6 1.6L20 6l-1.4.4L18 8l-.6-1.6L16 6l1.4-.4L18 4Z" />
-  )}
-  {name === "film" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Zm0 4h16M9 4v16" />
-  )}
-  {name === "dent" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 0 1 18 0 9 9 0 0 1-18 0Zm5.5 1.5c1-2 2-3 3.5-3s2.5 1 3.5 3" />
-  )}
-  {name === "windshield" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 16c1.5-6 3-8 7-8s5.5 2 7 8c-4-1.2-10-1.2-14 0Zm7-8v8" />
-  )}
-  {name === "truck" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11v8H3V7Zm11 3h3.5L20 12.5V15h-6v-5ZM7 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-  )}
-  {name === "van" && (
-    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8a1 1 0 0 1 1-1h9.5c.6 0 1.2.3 1.6.8L19 12l1.5.5c.3.1.5.4.5.8V15h-2M3 8v7h2m0 0a1.5 1.5 0 0 0 3 0m-3 0h3m8 0a1.5 1.5 0 0 0 3 0m-3 0h3M8 15h6M13 7v5h6" />
-  )}
-</svg>
+{
+  name === "scissors" && (
+    <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="6" cy="18" r="3" />
+      <line x1="20" y1="4" x2="8.12" y2="15.88" />
+      <line x1="14.47" y1="14.48" x2="20" y2="20" />
+      <line x1="8.12" y1="8.12" x2="12" y2="12" />
+    </svg>
+  )
+}
+{
+  name === "bath" && (
+    <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 12V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <path d="M5 12v3a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-3" />
+      <line x1="7" y1="21" x2="6" y2="22.5" />
+      <line x1="17" y1="21" x2="18" y2="22.5" />
+    </svg>
+  )
+}
+{
+  name === "paw" && (
+    <svg class={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <ellipse cx="6" cy="10" rx="1.8" ry="2.4" />
+      <ellipse cx="10" cy="6.5" rx="1.8" ry="2.4" />
+      <ellipse cx="14" cy="6.5" rx="1.8" ry="2.4" />
+      <ellipse cx="18" cy="10" rx="1.8" ry="2.4" />
+      <path d="M12 12c2.4 0 4.5 1.6 4.5 3.8 0 1.8-1.6 2.7-3.2 2.7-.9 0-1.2.4-1.3.6-.1-.2-.4-.6-1.3-.6-1.6 0-3.2-.9-3.2-2.7C7.5 13.6 9.6 12 12 12Z" />
+    </svg>
+  )
+}
+{
+  name === "brush" && (
+    <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="6" y="3" width="12" height="7" rx="3" />
+      <line x1="9" y1="10" x2="9" y2="15" />
+      <line x1="12" y1="10" x2="12" y2="16" />
+      <line x1="15" y1="10" x2="15" y2="15" />
+      <path d="M12 16v3a2 2 0 0 1-2 2H8" />
+    </svg>
+  )
+}
+{
+  name === "ear" && (
+    <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 8.5a6 6 0 0 1 12 0c0 3-2.2 4.2-3.5 5.3-1 .9-1.2 1.7-1.4 2.7-.2 1.1-.9 2-2.1 2A2.5 2.5 0 0 1 8.5 16" />
+      <path d="M9.5 8.5a2.5 2.5 0 0 1 5 0" />
+    </svg>
+  )
+}
+{
+  name === "heart" && (
+    <svg class={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 20s-7-4.35-9.33-8.6C1.1 8.4 2.6 5.5 5.6 5.5c1.8 0 3.1 1 4.4 2.6C11.3 6.5 12.6 5.5 14.4 5.5c3 0 4.5 2.9 2.93 5.9C19 15.65 12 20 12 20Z" />
+    </svg>
+  )
+}

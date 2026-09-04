@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
 /*
-  Brand theme tokens (Tailwind v4 `@theme`).
-  These generate utilities like `bg-ink`, `text-accent`, `border-line`, etc.
-  Tweak the hex values here to re-skin the whole site.
+  ─────────────────────────────────────────────────────────────────────────
+  Patty's Pup Cuts — brand theme (Tailwind v4 `@theme`)
+  ─────────────────────────────────────────────────────────────────────────
+  Palette comes straight from the logo: hot pink, soft blush, warm greys, and
+  clean off-white. These tokens generate utilities like `bg-pink`, `text-pink`,
+  `bg-blush`, `border-line`, etc. Tweak the hex values here to re-skin the site.
 */
 @theme {
   /* Core brand palette */
-  --color-ink: #0a0f1a;        /* near-black navy — dark sections, footer */
-  --color-ink-800: #111a2e;    /* slightly lifted dark */
-  --color-ink-700: #1b2740;    /* cards on dark */
-  --color-accent: #0ea5e9;     /* bright "shine" blue — primary accent */
-  --color-accent-600: #0284c7; /* accent hover */
-  --color-gold: #f5b301;       /* awards / highlights */
-  --color-line: #e2e8f0;       /* light hairline borders */
+  --color-pink: #fe318e;        /* hot pink — primary accent, CTAs, links */
+  --color-pink-600: #e21a78;    /* darker pink — hover states */
+  --color-pink-700: #b91461;    /* deepest pink — footer / on-blush text */
+  --color-blush: #f8acb6;       /* soft blush — decorative fills, borders */
+  --color-blush-soft: #fdeef1;  /* palest pink — section backgrounds */
+  --color-cloud: #f7f8fa;       /* off-white — alternating section ground */
+  --color-ink: #33262b;         /* warm charcoal — headings */
+  --color-body: #636363;        /* medium grey — body text */
+  --color-line: #f2dde3;        /* soft pink hairline borders */
 
   /* Typography */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  --font-display: "Poppins", var(--font-sans);
+  --font-display: "Baloo 2", var(--font-sans);
+  --font-script: "Pacifico", cursive;
 }
 
 html {
@@ -28,13 +34,29 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: #0f172a;
+  color: var(--color-body);
   background: #ffffff;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+/* Decorative script accent (eyebrows, flourishes). Use sparingly. */
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* A soft dotted "paw trail" divider, drawn in CSS (no filler images). */
+.paw-divider {
+  height: 1.25rem;
+  background-image: radial-gradient(circle, var(--color-blush) 40%, transparent 42%);
+  background-size: 1.5rem 1.5rem;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.8;
 }
 
 /* Respect users who prefer reduced motion */
