@@ -1,6 +1,6 @@
-name: Build and Deploy to SiteGround
+name: Build and Deploy to Brownrice
 
-# Deploys the built site to SiteGround on every push to main.
+# Deploys the built site to Brownrice (SFTP host) on every push to main.
 # Credentials come from repository Secrets (Settings → Secrets and variables →
 # Actions) — nothing sensitive is stored in this file.
 on:
@@ -13,7 +13,7 @@ permissions:
 
 # Never let two deploys run at once (avoids half-uploaded sites).
 concurrency:
-  group: deploy-siteground
+  group: deploy-brownrice
   cancel-in-progress: false
 
 jobs:
@@ -35,14 +35,14 @@ jobs:
       - name: Build site (outputs to dist/)
         run: npm run build
 
-      - name: Deploy dist/ to SiteGround via SFTP
+      - name: Deploy dist/ to Brownrice via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USERNAME }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          # SiteGround SFTP is usually port 22; some accounts use 18765.
-          # Add an SFTP_PORT secret only if 22 doesn't work for your account.
+          # Brownrice SFTP is usually port 22. Add an SFTP_PORT secret only if
+          # your account uses a non-standard port.
           port: ${{ secrets.SFTP_PORT || '22' }}
           local_path: "./dist/*"
           remote_path: ${{ secrets.SFTP_REMOTE_PATH }}

@@ -2,7 +2,7 @@
 
 A fast, static marketing site for **Patty's Pup Cuts** — a home-based, mother-and-daughter
 dog grooming salon in **Morrisville, PA** — built with [Astro](https://astro.build) +
-[Tailwind CSS](https://tailwindcss.com) and deployed to SiteGround via GitHub Actions (SFTP).
+[Tailwind CSS](https://tailwindcss.com) and deployed to Brownrice via GitHub Actions (SFTP).
 
 This project replaces the previous WordPress site at `pupcutspa.com`.
 
@@ -117,22 +117,27 @@ The **Women-Owned certification badge** was kept and is featured on the About pa
 
 ---
 
-## Deployment (GitHub Actions → SiteGround)
+## Deployment (GitHub Actions → Brownrice)
 
 `.github/workflows/deploy.yml` runs on every push to **`main`**:
-checkout → install → `npm run build` → upload `dist/` to SiteGround over **SFTP**.
+checkout → install → `npm run build` → upload `dist/` to **Brownrice** over **SFTP**.
+
+The workflow uses standard SFTP with host-agnostic secret names, so only the secret
+*values* are Brownrice-specific — no workflow changes are needed for the host.
 
 ### Required repository secrets
 
-Add these under **GitHub → Settings → Secrets and variables → Actions → New repository secret**:
+Add these under **GitHub → Settings → Secrets and variables → Actions → New repository secret**.
+Get the SFTP hostname, username, password, and path from your Brownrice control panel
+(or Brownrice support) for the `pupcutspa.com` account:
 
 | Secret name | Value |
 | --- | --- |
-| `SFTP_HOST` | Your SiteGround SFTP hostname or server IP (from Site Tools → Devs → FTP/SFTP, e.g. `giga123.siteground.biz`) |
-| `SFTP_USERNAME` | The SFTP account username |
-| `SFTP_PASSWORD` | That SFTP account's password |
-| `SFTP_REMOTE_PATH` | Absolute path to the web root to publish into (e.g. `/home/customer/www/pupcutspa.com/public_html`) |
-| `SFTP_PORT` | *(optional)* Only add this if port `22` doesn't work — some SiteGround accounts use `18765` |
+| `SFTP_HOST` | Your Brownrice SFTP hostname or server IP |
+| `SFTP_USERNAME` | The SFTP/SSH account username |
+| `SFTP_PASSWORD` | That account's password |
+| `SFTP_REMOTE_PATH` | Absolute path to the web root to publish into (e.g. `/home/<user>/sites/pupcutspa.com/` — confirm the exact path with Brownrice) |
+| `SFTP_PORT` | *(optional)* Only add this if your account uses a non-standard SSH/SFTP port (default is `22`) |
 
 Nothing sensitive is committed — the workflow reads only from these secrets.
 
@@ -141,8 +146,9 @@ Nothing sensitive is committed — the workflow reads only from these secrets.
 Because the current web root still contains WordPress files:
 
 1. WordPress's `index.php` can take priority over `index.html`. The included `public/.htaccess`
-   sets `DirectoryIndex index.html` to prefer the new static homepage, but the cleanest result is
-   to **remove the old WordPress files** from the web root (back them up first) or deploy into a
+   sets `DirectoryIndex index.html` to prefer the new static homepage (this applies when Brownrice
+   serves the site via Apache; it's harmlessly ignored otherwise). The cleanest result is to
+   **remove the old WordPress files** from the web root (back them up first) or deploy into a
    clean directory.
 2. To have the deploy mirror `dist/` exactly (deleting stale files on the server), set
    `delete_remote_files: true` in the workflow — do this only after you've confirmed
@@ -153,7 +159,7 @@ Because the current web root still contains WordPress files:
 ## Project structure
 
 ```
-├─ .github/workflows/deploy.yml   # CI/CD: build + SFTP deploy to SiteGround
+├─ .github/workflows/deploy.yml   # CI/CD: build + SFTP deploy to Brownrice
 ├─ public/                        # copied as-is to the site root
 │  ├─ robots.txt
 │  ├─ favicon.svg
