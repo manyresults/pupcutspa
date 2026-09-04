@@ -51,3 +51,18 @@ jobs:
           # remote files not present in dist/ — useful once old WordPress files
           # are cleared, but destructive, so enable deliberately).
           delete_remote_files: false
+
+      # The glob above ("./dist/*") skips dotfiles, so upload .htaccess
+      # explicitly — it's what makes index.html win over WordPress's index.php
+      # and applies the old-URL redirects.
+      - name: Upload .htaccess (dotfile skipped by the glob above)
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT || '22' }}
+          local_path: "./dist/.htaccess"
+          remote_path: ${{ secrets.SFTP_REMOTE_PATH }}
+          sftp_only: true
+          delete_remote_files: false
