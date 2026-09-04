@@ -54,7 +54,7 @@ A few items are reasonable defaults and are flagged in code — confirm or corre
 
 | Item | Where | Notes |
 | --- | --- | --- |
-| **Pricing** | `consts.ts → PRICING` | Small $50 / Med $60 / Large $80 / X-Large $100+ — matches the current site. Confirm still current. |
+| **Pricing** | `consts.ts → PRICING` | Small $50 / Med $60 / Large $80 / X-Large $100+ — ✅ confirmed correct by the owner (Sept 2026). |
 | **FAQ assumptions** | `consts.ts → FAQS` | Answers about **vaccination policy, appointment length, and payment methods** are marked `ASSUMPTION:` in comments. These internal notes are auto-stripped from the public page — update the answers with your real policies. |
 | **Map coordinates** | `consts.ts → SITE.geo` | Approximate; marked `VERIFY`. Refine the exact pin if desired. |
 | **Hours** | `consts.ts → SITE.appointmentOnly` | Currently presented as **"By appointment only"** with no set hours (and no `openingHours` in the schema). To publish set hours, flip `appointmentOnly` to `false` and fill the `hours` array. |

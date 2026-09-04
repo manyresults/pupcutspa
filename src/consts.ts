@@ -8,11 +8,12 @@
  *  all update automatically.
  *
  *  CONTENT SOURCE: Text, pricing, testimonials, and images were migrated from
- *  the live WordPress site (pupcutspa.com) in September 2026. Prices and the
- *  five testimonials are verbatim from the site. A few FAQ answers are marked
- *  `ASSUMPTION:` in comments — these are reasonable defaults (vaccination
- *  policy, payment methods, appointment length) that the owner should confirm
- *  or correct before/after go-live.
+ *  the live WordPress site (pupcutspa.com) in September 2026. The five
+ *  testimonials are verbatim from the site, and the full-groom PRICING below
+ *  was confirmed correct by the owner on 2026-09-04. A few FAQ answers are
+ *  still marked `ASSUMPTION:` in comments — these are reasonable defaults
+ *  (vaccination policy, payment methods, appointment length) that the owner
+ *  should confirm or correct before/after go-live.
  */
 
 export const SITE = {
@@ -111,6 +112,7 @@ export interface PriceTier {
   popular?: boolean;
 }
 
+// Full-groom pricing by size — confirmed correct by the owner on 2026-09-04.
 export const PRICING: PriceTier[] = [
   { size: "Small Dog", price: "$50", note: "Per dog, per session" },
   { size: "Medium Dog", price: "$60", note: "Per dog, per session", popular: true },
