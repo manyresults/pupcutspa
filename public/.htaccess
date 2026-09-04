@@ -1,9 +1,21 @@
-# Static site served from Apache (SiteGround).
-# Ensures the static index.html is preferred over any leftover WordPress
-# index.php, sets a custom 404, and adds sensible caching/compression.
+# Static site served from Apache (Brownrice).
+# Prefers the new static index.html over any leftover WordPress index.php,
+# 301-redirects the old WordPress URLs to their new pages (preserves SEO),
+# sets a custom 404, and adds sensible caching/compression.
 
 # Prefer the static homepage over any leftover WordPress index.php
 DirectoryIndex index.html index.htm
+
+# --- 301 redirects: old WordPress URLs → new static pages --------------------
+# Keeps existing Google/Bing rankings and inbound links working after the move.
+<IfModule mod_alias.c>
+  Redirect 301 /about-your-local-dog-groomer/ /about/
+  Redirect 301 /dog-grooming-morrisville-pa/ /about/
+  Redirect 301 /dog-grooming-prices-services/ /services/
+  Redirect 301 /contact-dog-groomer-pup-cuts/ /contact/
+  Redirect 301 /reviews-pup-cuts-dog-salon-reviews-and-testimonials-forn-morrisville-pa/ /reviews/
+  Redirect 301 /photos-of-dog-grooming-home-service/ /reviews/
+</IfModule>
 
 # Serve the Astro 404 page for missing URLs
 ErrorDocument 404 /404.html
